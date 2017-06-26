@@ -1,0 +1,677 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Shikshitha</title>
+    <meta name="description" content="Description.">
+    <meta name="keywords" content="Keywords">
+
+    <link rel="shortcut icon" href="assets/img/logo.png">
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css?ver=1.0" type="text/css" media="all" />
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css?ver=1.0" type="text/css" media="all" />
+    <link rel="stylesheet" href="assets/css/toastr.min.css?ver=1.0" type="text/css" media="all" />
+    <link rel="stylesheet" href="assets/css/animate.css?ver=1.0" type="text/css" media="all" />
+    <link rel="stylesheet" href="assets/css/jquery.accordion.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="assets/css/style.css?ver=1.0" type="text/css" media="all" />
+
+    <!--[if lt IE 9]>
+        <script src="assets/js/html5.js"></script>
+        <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="assets/js/aws-sdk.min.js"></script>
+    <script type="text/javascript">
+        var LPAWS = {};
+
+        // Initialize the Amazon Cognito credentials provider
+        AWS.config.region = 'us-west-2'; // Region
+		AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+		    IdentityPoolId: 'us-west-2:eb479ee4-e8f0-47bb-aa45-35f452aed77a',
+		});
+
+        LPAWS.sendToTopic = function() {
+            var sns = new AWS.SNS();
+            var name = document.querySelector('#input-name').value;
+            var email = document.querySelector('#input-email').value;
+            var nature = document.querySelector('#input-nature').value;
+            var msg = document.querySelector('#input-msg').value;
+            var message1 = name.concat(" says : ", nature);
+            var message2 = message1.concat(". Email Id : ", email);
+            var message = message2.concat(". Message : ", msg);
+            var params = {
+                //Message: 'Hello topic', /* required */
+                Message: message,
+                Subject: 'Browser SNS publish - contact form',
+                TopicArn: 'arn:aws:sns:us-west-2:703449783643:shikshitha-contact-form'
+            };
+            sns.publish(params, function(err, data) {
+                if (err) console.log(err, err.stack); // an error occurred
+                else { 
+                	console.log(data); 
+                	alert('submitted successfully!');
+                } // successful response
+            });
+        };
+    </script>
+
+</head>
+
+<body>
+    <header id="header">
+        <div class="top-bar"></div>
+        <div class="wrapper">
+            <nav class="navbar" role="navigation">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#header-nav">
+                            <span class="sr-only">Toggle navigation</span>
+                            <i class="fa fa-2x fa-bars"></i>
+                        </button>
+                        <a class="navbar-brand scroll-to" href="#home"><img src="assets/img/logo.png" class="logo"></a>
+                    </div>
+
+                    <div class="collapse navbar-collapse" id="header-nav">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="hidden"><a href="#home">home</a></li>
+                            <li><a href="#mission">mission</a></li>
+                            <li><a href="#services">Services</a></li>
+                            <li><a href="#profile">Profile</a></li>
+                            <li><a href="#why-us">Why Us</a></li>
+                            <li><a href="#contact">contact</a></li>
+                            <li><a href="#" class="external nav-cta-button">get the app</a></li>
+                            <li class="nav-social-icon-wrapper first"><a href="#" class="external nav-social-icon"><i class="fa fa-twitter"></i></a></li>
+                            <li class="nav-social-icon-wrapper"><a href="#" class="external nav-social-icon"><i class="fa fa-linkedin"></i></a></li>
+                            <li class="nav-social-icon-wrapper"><a href="#" class="external nav-social-icon"><i class="fa fa-facebook"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <div id="header-spacer"></div>
+
+    <section id="home">
+        <img src="assets/img/banner-img.png" class="img-full hidden-md hidden-lg">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="banner-content">
+                        <div class="banner-content-inner">
+                            <h1>SHIKSHITHA</h1>
+                            <h2>
+                                An initiative <em>&nbsp;|&nbsp;</em> A beginning
+                            </h2>
+                            <p>
+                                We @ Shikshitha bring you the most Reliable and user friendly Mobile Apps powered with Enterprise Resource Planning Features – bridging distance between Teachers, Students & Parents
+                            </p>
+
+                            <div class="banner-app-links">
+                                <h3>Get the app from Google Play:</h3>
+                                <div class="banner-app-link-wrapper">
+                                    <a href="#"><img src="assets/img/fot-parent-light.png"></a>
+                                    <a href="#"><img src="assets/img/for-teacher-light.png"></a>
+                                    <a href="#"><img src="assets/img/for-pricipal-light.png"></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <img src="assets/img/banner-phone.png" class="banner-phone">
+                    </div>
+                </div>
+                <div class="col-md-6 hidden-xs hidden-sm">
+                    <div class="banner-content">
+                        <div class="banner-image bg-cover" style="background-image: url('assets/img/banner-img.png')"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="tagline">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    Enrich the power of <strong>knowledge + education</strong> with Shikshitha
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section id="experience">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <h2>
+                        Experience Shikshitha, the complete solution
+                        <br>for education challenges for various segments.
+                    </h2>
+                </div>
+            </div>
+            <div class="row margin-bottom-30">
+                <div class="col-sm-4 margin-bottom-30">
+                    <img src="assets/img/img-1.png" class="img-responsive">
+                </div>
+                <div class="col-sm-8 margin-bottom-30">
+                    <div class="experience-content">
+                        <p>
+                            <strong>We aim to be a part of the “in the moment Education support & Enterprise Resource Solution provider</strong> “, adept with state-of-the art technologies and supported by highly qualified professionals in providing articulate solutions and bridging distance between educationists, learners and guardians.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row margin-bottom-30">
+                <div class="col-sm-4 margin-bottom-30 col-sm-push-8">
+                    <img src="assets/img/img-2.png" class="img-responsive">
+                </div>
+                <div class="col-sm-8 margin-bottom-30 col-sm-pull-4">
+                    <div class="experience-content">
+                        <p>
+                            <strong>We intend to put together a platform which will enable teachers to communicate with parents seamlessly and change the communication scenario</strong> to accommodate the high demand academic requirements, performance analysis,   search & development and become the “Academic solution provider of Choice”, supported by brand hearted service, high-tech solutions and a solid platform comprised of 4 years of cumulative experience.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row margin-bottom-30">
+                <div class="col-sm-4 margin-bottom-30">
+                    <img src="assets/img/img-3.png" class="img-responsive">
+                </div>
+                <div class="col-sm-8 margin-bottom-30">
+                    <div class="experience-content">
+                        <p>
+                            <strong>We aim to be a part of the “in the moment Education support & Enterprise Resource Solution provider</strong> “, adept with state-of-the art technologies and supported by highly qualified professionals in providing articulate solutions and bridging distance between educationists, learners and guardians.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="innovation" id="mission">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <h2>WE THINK DIFFERENT! WE THINK</h2>
+                    <h3 class="section-title">Innovative</h3>
+                    <p>
+                        Education is no more a reflexive action; it’s on the go with applications which change positions on the shelf. We at Shikshitha create customized applications, keeping in mind the requirements set by both school management and the parent’s forum. The Apps will be user-friendly and customizable.
+                    </p>
+                    <p>
+                        We offer easy options to the administrator to supervise and analyze all the activities pertaining to the application.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="mission_container">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="mission-quote">
+                        <div class="mission-quote-inner">
+                            We trust that great education matters
+                            and every educational institutions, schools
+                            and colleges can be outstanding
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="mission-box text-center">
+                        <img src="assets/img/mission-1.png" class="img-responsive center-block margin-bottom-15">
+                        <p>
+                            Committed to prompt, reliable service & support leading to seamless communication exceeding young enthusiasts growth and satisfaction
+                        </p>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="mission-box text-center">
+                        <img src="assets/img/mission-2.png" class="img-responsive center-block margin-bottom-15">
+                        <p>
+                            At Shikshitha, everything we do is designed to enable efficient communication, help raise the attainment of the student’s performance and keep parents involved wherever required.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="mission-box text-center">
+                        <img src="assets/img/mission-3.png" class="img-responsive center-block margin-bottom-15">
+                        <p>
+                            We aim to help teachers support students, helping them to achieve their full potential in improving outcomes.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="mission-statement">
+                        <h2>Mission</h2>
+                        <p>
+                            Our mission is to be recognized as “the service provider of choice” who is supported by consistent service excellence powered by technical expertise.
+                        </p>
+                        <p>
+                            We extend a protected future, build dreams of emerging minds, and connect education with secure & reliable communication to super-charge learning.
+                        </p>
+                        <p>
+                            <strong>We are Shikshitha, one name million trust!</strong>
+                        </p>
+                    </div>
+
+                    <div class="mission-statement">
+                        <h2>Vision</h2>
+                        <p>
+                            To meet all the said and implied needs of the students, teachers and parents and bridge the gap so as to achieve exceeding satisfaction through highly motivated involvement and technological support.”
+                        </p>
+                    </div>
+
+                    <div class="mission-statement">
+                        <h2>Objectives</h2>
+                        <p>
+                            Our key objective is to set smart standards for all our clients by supporting them with services that demonstrate professionalism, technical proficiency and exceed teacher’s and parent’s expectation.
+                        </p>
+                        <p>
+                            We aim to primarily focus towards service that drives passion for excellence and secure web based school management system with great support.
+                            We continuously reinforce and research each segment to prepare us for challenge of change
+                        </p>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 text-center wyg-heading">
+                    <h2 class="section-title">Services</h2>
+                    <h3>Shikshitha …is all you need and all that you want!</h3>
+                    <p>
+                        From students’ attendance to announcements, notices, reminders and alerts — everything packaged in one powerful school management system.
+                    </p>
+                    <p>
+                        Shikshitha is designed keeping in mind the Educational requirement of Schools, Colleges, teachers, parents and students – a key emphasis on their needs and requirements.
+                    </p>
+                    <p>
+                        We assure professional assistance from our services and endeavor to offer resolutions to common problems faced on a daily basis.
+                    </p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <div class="what-you-get-heading">
+                        <h2>What you get?</h2>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="what-you-get-box">
+                        <div class="wyg-icon">
+                            <img src="assets/img/offer1.png">
+                        </div>
+                        <div class="wyg-content">
+                            <h2>Console/ Dashboard</h2>
+                            <p>
+                                Our app will offer you a user-friendly and helpful dashboard - which will allow all the teachers a quick way to check schedules and curriculum cycles.
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="what-you-get-box">
+                        <div class="wyg-icon">
+                            <img src="assets/img/offer-2.png">
+                        </div>
+                        <div class="wyg-content">
+                            <h2>Attendance / Homework</h2>
+                            <p>
+                                Within a fraction of seconds, the teacher will be able to enter or check the student's presences/absences and homework.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="what-you-get-box">
+                        <div class="wyg-icon">
+                            <img src="assets/img/offer-3.png">
+                        </div>
+                        <div class="wyg-content">
+                            <h2>Notifications</h2>
+                            <p>
+                                Any student will be able to receive automatic notifications from the system, for instance an occurred lesson confirm or a makeup class date indication, and the communications sent from the school administration.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="what-you-get-box">
+                        <div class="wyg-icon">
+                            <img src="assets/img/offer-4.png">
+                        </div>
+                        <div class="wyg-content">
+                            <h2>Timetable</h2>
+                            <p>
+                                Teacher will have the access to check the lesson plan and schedule their curriculum / semester cycle accordingly with the classroom, time and subject’s indication.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="what-you-get-box">
+                        <div class="wyg-icon">
+                            <img src="assets/img/offer-5.png">
+                        </div>
+                        <div class="wyg-content">
+                            <h2>An user-friendly system </h2>
+                            <p>
+                                The data will be received straight away by the system and we will make sure data gets communicated in timely manner.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="what-you-get-box">
+                        <div class="wyg-icon">
+                            <img src="assets/img/offer-6.png">
+                        </div>
+                        <div class="wyg-content">
+                            <h2>Chat</h2>
+                            <p>
+                                Teacher and Principal can start chat conversation with Student parents whenever there is need.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <div class="wyg-footer">
+                        <h3>All the programs have been created to make easy and quicken the daily school tasks. </h3>
+                        <p>
+                            From the administrative side to the operative side, with Shikshitha, you will get a simple and useful tool to run the conventional education system with a modern touch.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+
+    <section id="profile">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <div class="profile-heading">
+                        <h2 class="section-title">Profile</h2>
+                        <h3>
+                            Everything we do revolve around connecting students and empowering them. Our team comprises of young, avid enthusiast, who are ground-breaking the way students learn and communicate.
+                        </h3>
+                        <p>
+                            We rely on many passionate people who create, inspire, invest and work with laser focus approach – Let us read their stories
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-quote-wrapper">
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="profile-quote">
+                            <div class="profile-quote-inner">
+                                <img src="assets/img/open-quote.png" class="img-responsive margin-bottom-15">
+                                <p>
+                                    An extremely affable, enthusiast and richly experienced professional who has a proven track record with software development & technology. 
+                                </p>
+                                <p>
+                                    He strengthened his workable ideas and started to transform strategic development plans into workable solutions. His benchmark performance with startup ushered him the out-of-the-box thinking and resulted in a strategic, dynamic and multi-talented personality and has since then never looked back. His ability to Work on tech that meets k12 field made him realize and conceive a new thought which emerged as Shikshitha.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="quote-author">
+                            <strong>Vinay Krishna</strong>, Founder
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <img src="assets/img/profile-img.png" class="img-responsive">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="why-us">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <div class="why-us-heading">
+                        <h2 class="section-title">Why US?</h2>
+                        <h3>The future is technology &nbsp;|&nbsp; the future is Smart Apps</h3>
+                        <p>
+                            Shikshitha Smart Apps will be a hallmark of today’s learning paradigm. The technologies used by us are naturally intuitive to school, colleges and guardians. Our Apps are user friendly and helps yield better and smarter outputs – Apps are instrumental in learning new technologies and enhances the understanding of the concepts.
+                        </p>
+                        <p>
+                            We provide the smartest functionalities and user friendly communication methodologies for both administration and parents. We are flexible and can customize the App based on your requirement
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="why-people-trust-wrapper">
+                        <div class="why-people-trust text-center">
+                            <img src="assets/img/clipper.png" class="clip-image img-responsive center-block">
+                            <h2>Why people trust us?</h2>
+                            <ul class="list-unstyled">
+                                <li>Our services give our client an edge for an appealing, proficient communication system</li>
+                                <li>
+                                    We regularly inspect and based on the results, we streamline an effective plan and flexible execution suiting the requirement of the client management ensuring cent percent satisfaction.
+                                </li>
+                                <li>
+                                    We guarantee our services with state-of-the-art technologies and high-end technologies, supported by talented, experienced personnel of the trade.
+                                </li>
+                                <li>
+                                    Out prime focus is to render approaches, which ensures each of our end clients to achieve the optimum goal and build a strong bond between parents and teachers.
+                                </li>
+                                <li>
+                                    Our services are not restricted and extended to each and every segment.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="wyg-accordion-container text-center">
+                        <h3>What you get? </h3>
+
+                        <div data-accordion-group>
+                            <div class="accordion accordion-item" data-accordion>
+                                <div data-control class="accordion-header">Easy facility to download our Apps from Google Play Store</div>
+                                <div data-content class="accordion-content">
+                                    <div>
+                                        Shikshitha Smart Apps will be a hallmark of today’s learning paradigm. The technologies used by us are naturally intuitive to school, colleges and guardians. Our Apps are user friendly and helps yield better and smarter outputs – Apps are instrumental in learning new technologies and enhances the understanding of the concepts.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion accordion-item" data-accordion>
+                                <div data-control class="accordion-header">Branding and promotions </div>
+                                <div data-content class="accordion-content">
+                                    <div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion accordion-item" data-accordion>
+                                <div data-control class="accordion-header">Saves Time</div>
+                                <div data-content class="accordion-content">
+                                    <div>
+                                       	
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion accordion-item" data-accordion>
+                                <div data-control class="accordion-header">Highly Organized</div>
+                                <div data-content class="accordion-content">
+                                    <div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion accordion-item" data-accordion>
+                                <div data-control class="accordion-header">Cost Effective</div>
+                                <div data-content class="accordion-content">
+                                    <div>
+                                       	
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion accordion-item" data-accordion>
+                                <div data-control class="accordion-header">Trouble Free</div>
+                                <div data-content class="accordion-content">
+                                    <div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion accordion-item" data-accordion>
+                                <div data-control class="accordion-header">Increased Efficiency</div>
+                                <div data-content class="accordion-content">
+                                    <div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <section id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-5">
+                    <div class="contact-content">
+                        <h2 class="section-title">Contact Us</h2>
+                        <p>
+                            We are here to answer any queries you may
+                            have about www.shikshitha.com
+                        </p>
+                        <p>
+                            Reach out to us and we will respond as soon as we can.
+                        </p>
+                        <p>
+                            Just fill in the form and send us a message:
+                        </p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-sm-offset-1">
+                    <div class="contact-form-wrapper">
+                        <form method="post" action="javascript:LPAWS.sendToTopic();" >
+                            <div class="input-wrapper">
+                                <input class="form-input" name="Name" placeholder="Name" id="input-name" required>
+                            </div>
+                            <div class="input-wrapper">
+                                <input type="email" class="form-input" name="Email" placeholder="Email" id="input-email" required>
+                            </div>
+                            <div class="input-wrapper">
+                               <select name="inquiry" class="form-input" id="input-nature">
+                                   <option selected disabled>Nature of Inquiry</option>
+                                   <option>Interested in product</option>
+                                   <option>Want to join sales force</option>
+                               </select>
+                            </div>
+                            <div class="input-wrapper">
+                                <textarea class="form-input" name="message" placeholder="Message" id="input-msg" rows="5" required></textarea>
+                            </div>
+
+                            <div class="contact-form-submit-wrapper">
+                                <button class="button button-primary">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <ul class="footer-nav">
+                        <li><a href="#mission" class="scroll-to">mission</a></li>
+                        <li><a href="#services" class="scroll-to">Services</a></li>
+                        <li><a href="#profile" class="scroll-to">Profile</a></li>
+                        <li><a href="#why-us" class="scroll-to">Why Us</a></li>
+                        <li><a href="#contact" class="scroll-to">contact</a></li>
+                    </ul>
+
+                    <div class="app-links">
+                        <h2 class="app-link-heading">Get the app from Google Play:</h2>
+                        <div class="app-link-container">
+                            <a href="#"><img src="assets/img/for-parent.png"> </a>
+                            <a href="#"><img src="assets/img/for-teacher.png"> </a>
+                            <a href="#"><img src="assets/img/for-principal.png"> </a>
+                        </div>
+                    </div>
+
+                    <div class="footer-logo">
+                        <img src="assets/img/logo-gray.png" class="img-responsive center-block">
+                    </div>
+
+                    <div class="copyright">
+                        Copyright 2017 <strong>Shikshitha.</strong> All Rights Reserved
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="back-to-top"><i class="fa fa-angle-up fa-3x"></i></div>
+
+    <!--[if lt IE 9]>  
+        <script type="text/javascript" src="assets/js/jquery-1.11.2.min.js?ver=1"></script>
+    <![endif]-->  
+    <!--[if (gte IE 9) | (!IE)]><!-->  
+        <script type="text/javascript" src="assets/js/jquery-2.1.3.min.js?ver=1"></script>
+    <!--<![endif]-->  
+
+    <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/js/toastr.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.appear.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.sticky.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.matchHeight.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.singlePageNav.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.accordion.js"></script>
+    <script type="text/javascript" src="assets/js/scripts.js"></script>
+
+</body>
+</html>
